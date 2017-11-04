@@ -69,7 +69,7 @@ def logic3(func):
     def func_wrapper(msg):
         resp = func(msg)
         if msg.bessSOC < 0.6:
-            resp.power_reference = -6.0
+            resp.power_reference = -10.0
         # TODO: Import your logic here
         return resp
     return func_wrapper
