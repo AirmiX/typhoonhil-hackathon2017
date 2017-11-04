@@ -46,7 +46,7 @@ def logic1(func):
     def func_wrapper(msg):
         resp = func(msg)
         # TODO: Import your logic here
-        if msg.buying_price == 8:
+        if msg.buying_price == 8 and msg.bessSOC >= 0.6:
             if msg.selling_price > 0:
                 resp.power_reference = 0.25
             else:
@@ -69,7 +69,7 @@ def logic3(func):
     def func_wrapper(msg):
         resp = func(msg)
         if msg.bessSOC < 0.6:
-            resp.power_reference = -6.0
+            resp.power_reference = -10.0
         # TODO: Import your logic here
         return resp
     return func_wrapper
