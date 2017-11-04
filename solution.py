@@ -89,7 +89,7 @@ def logic4(func):
 @expencive_grid
 @logic1
 @logic2
-# @logic3
+@logic3
 # @logic4
 def get_result(msg):
     return ResultsMessage(data_msg=msg,
@@ -98,6 +98,3 @@ def get_result(msg):
                           load_three=True,
                           power_reference=0.0,
                           pv_mode=PVMode.ON)
-
-
-
