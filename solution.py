@@ -40,9 +40,6 @@ def expencive_grid(func):
 
 
 def logic1(func):
-    """
-    When buying price is 8 (max), turn off load three
-    """
     def func_wrapper(msg):
         resp = func(msg)
         # TODO: Import your logic here
@@ -50,9 +47,6 @@ def logic1(func):
     return func_wrapper
 
 def logic2(func):
-    """
-    When buying price is 8 (max), turn off load three
-    """
     def func_wrapper(msg):
         resp = func(msg)
         # TODO: Import your logic here
@@ -60,9 +54,6 @@ def logic2(func):
     return func_wrapper
 
 def logic3(func):
-    """
-    When buying price is 8 (max), turn off load three
-    """
     def func_wrapper(msg):
         resp = func(msg)
         # TODO: Import your logic here
@@ -70,9 +61,6 @@ def logic3(func):
     return func_wrapper
 
 def logic4(func):
-    """
-    When buying price is 8 (max), turn off load three
-    """
     def func_wrapper(msg):
         resp = func(msg)
         # TODO: Import your logic here
