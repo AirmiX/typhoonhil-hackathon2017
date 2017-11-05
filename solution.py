@@ -80,9 +80,6 @@ def worker(msg: DataMessage) -> ResultsMessage:
 
     l12 = l1 + l2
 
-    is_battery_prepared_for_electricity_loss = \
-        msg.bessSOC * 10 > (l12 if l12 < (BATTERY_MAX_POWER_PER_HOUR + DELTA) * 10 else BATTERY_MAX_POWER_PER_HOUR * 10)
-
     # 5520 : 0, 8, 3, 9.2, 0, 0.5950260191000842, False, 6.439929503154399
     # 5521, 0, 8, 3, 9.199899290220571, 0, 0.5842926857667509, True, 0
 
@@ -121,8 +118,13 @@ def worker(msg: DataMessage) -> ResultsMessage:
             if l12 > 3.9:
                 load_two = False
 
+            load = l12 if load_two else l1
+            is_battery_prepared_for_electricity_loss = \
+                msg.bessSOC * 10 - DELTA > (load if load < BATTERY_MAX_POWER else BATTERY_MAX_POWER)
+
+            load_and_solar_diff = load - msg.solar_production
+
             if is_battery_prepared_for_electricity_loss:
-                load_and_solar_diff = (l12 if load_two else l1) - msg.solar_production
                 power_reference = load_and_solar_diff if load_and_solar_diff < BATTERY_MAX_POWER else BATTERY_MAX_POWER
 
                 # else:
@@ -237,4 +239,3 @@ def get_result(msg):
                           load_three=True,
                           power_reference=0.0,
                           pv_mode=PVMode.ON)
-
