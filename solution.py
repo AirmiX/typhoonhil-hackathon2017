@@ -42,7 +42,6 @@ def worker(msg: DataMessage) -> ResultsMessage:
 
     is_grid_status_on = msg.grid_status
     current_load = msg.current_load
-    load_and_solar_diff = float(current_load - msg.solar_production)
     main_grid_power = float(msg.mainGridPower)
 
     is_battery_overload = msg.bessOverload
@@ -66,7 +65,7 @@ def worker(msg: DataMessage) -> ResultsMessage:
 
     # 3299, 1, 3, 3, 4.163380970229338, 0, 1.0, False, 2.909085131140325
     # 3300, 1, 8, 3, 4.1708203932499375, 0.0, 1.0, False, 2.9143666791605365
-    
+
     if not is_grid_status_on:
 
         l12 = l1 + l2
@@ -90,8 +89,8 @@ def worker(msg: DataMessage) -> ResultsMessage:
         else:  # expensive buying
 
             if is_battery_prepared_for_electricity_loss:
+                load_and_solar_diff = l1 + l2 - msg.solar_production
                 power_reference = load_and_solar_diff if load_and_solar_diff < BATTERY_MAX_POWER else BATTERY_MAX_POWER
-
 
                 # else:
                 #
